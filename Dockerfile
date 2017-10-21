@@ -1,9 +1,12 @@
-FROM scratch
-ADD centos-7.4.1708-docker.tar.xz /
+FROM ruby_base
 
-LABEL name="CentOS Base Image" \
-    vendor="CentOS" \
-    license="GPLv2" \
-    build-date="20170911"
+WORKDIR /web
 
-CMD ["/bin/bash"]
+# Install rvm, default ruby version and bundler.
+COPY .ruby-version /web/.ruby-version
+COPY Gemfile /web/Gemfile
+COPY Gemfile.lock /web/Gemfile.lock
+
+RUN /bin/bash -l -c "bundle install"
+
+COPY . /web

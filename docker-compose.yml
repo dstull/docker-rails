@@ -1,9 +1,28 @@
-version: '3'
+version: '2.1' # due to extends
 services:
-  web:
-    build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+  ruby_base:
+    build:
+      context: .
+      dockerfile: Dockerfile.ruby_base
+    image: ruby_base
     volumes:
       - .:/web
+  rails-raw:
+    build:
+      context: .
+    image: rails-raw
     ports:
-      - "3000:3000"
+      - 3000:3000
+    entrypoint:
+      - bash
+      - --login
+#  rails-test:
+#    extends: rails-raw
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.rails_test
+#    image: rails-test
+#    shm_size: 128M
+#    entrypoint:
+#      - bash
+#      - --login
