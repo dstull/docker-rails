@@ -1,16 +1,11 @@
 version: '2.1' # due to extends
 services:
-  ruby_base:
-    build:
-      context: .
-      dockerfile: Dockerfile.ruby_base
-    image: ruby_base
-    volumes:
-      - .:/web
   rails-raw:
     build:
       context: .
     image: rails-raw
+    volumes:
+      - .:/web
     ports:
       - 3000:3000
     entrypoint:

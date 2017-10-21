@@ -1,4 +1,4 @@
-FROM ruby_base
+FROM hammer098/ruby_24
 
 WORKDIR /web
 
