@@ -11,13 +11,13 @@ services:
     entrypoint:
       - bash
       - --login
-#  rails-test:
-#    extends: rails-raw
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.rails_test
-#    image: rails-test
-#    shm_size: 128M
-#    entrypoint:
-#      - bash
-#      - --login
+  rails-test:
+    extends: rails-raw
+    build:
+      context: test/
+      dockerfile: Dockerfile
+    image: rails-test
+    shm_size: 128M
+    entrypoint:
+      - bash
+      - --login
