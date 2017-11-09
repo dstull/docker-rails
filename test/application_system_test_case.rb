@@ -17,7 +17,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # window-size
     #   sets default window size in case the smaller default size is not enough
     #   we do not want max either, so this is a good compromise
-    
+
     capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
         chromeOptions: { args: %w[no-sandbox headless disable-gpu window-size=1400,1400] }
     )
