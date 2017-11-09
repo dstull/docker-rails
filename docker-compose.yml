@@ -1,9 +1,9 @@
 version: '2.1' # due to extends
 services:
-  rails-raw:
+  rails:
     build:
       context: .
-    image: rails-raw
+    image: rails
     volumes:
       - .:/web
     ports:
@@ -12,12 +12,21 @@ services:
       - bash
       - --login
   rails-test:
-    extends: rails-raw
+    extends: rails
     build:
-      context: test/
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: sdlc/Dockerfile.rails-test
     image: rails-test
     shm_size: 128M
     entrypoint:
       - bash
       - --login
+  rails-test-run:
+    image: rails-test
+    entrypoint:
+      - bash
+      - --login
+      - xvfb-run
+      - rails
+      - test:system
+      - RAILS_ENV=test

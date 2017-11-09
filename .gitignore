@@ -23,3 +23,7 @@
 .byebug_history
 
 /.idea
+
+# ignore temp Dockerfiles
+Dockerfile
+sdlc/Dockerfile.rails-test

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+build_rails() {
+  cat Dockerfile.prefix.in \
+  sdlc/Dockerfile.in \
+  > Dockerfile
+
+  time Docker-compose build \
+  rails
+}
+
+build_rails() {
+  cat Dockerfile.prefix.in \
+  sdlc/Dockerfile.in \
+  > Dockerfile
+
+  time Docker-compose build \
+  rails
+}
+
+build_rails_test() {
+  cat sdlc/Dockerfile.rails-test.in \
+  sdlc/Dockerfile.in \
+  > sdlc/Dockerfile.rails-test
+
+  time Docker-compose build \
+  rails-test
+}
+
+show_images() {
+  echo
+  echo
+  docker images | grep -e SIZe -e '^rails\b'
+}
+
+build_rails
+build_rails_test
+show_images

@@ -1,5 +1,4 @@
-FROM hammer098/ruby_24
-
+# common rails build steps
 WORKDIR /web
 
 # Install rvm, default ruby version and bundler.

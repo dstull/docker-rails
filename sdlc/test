@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+case "$1" in
+  "test")
+    echo "Starting rails-test and logging in. Container will stop once you exit"
+    echo
+    docker-compose run --rm rails-test
+  ;;
+  *)
+    echo "Starting rails-test, running and exiting"
+    echo
+    docker-compose run --rm rails-test-run
+  ;;
+esac

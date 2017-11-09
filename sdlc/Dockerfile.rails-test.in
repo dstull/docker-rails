@@ -1,4 +1,4 @@
-FROM rails-raw
+FROM hammer098/ruby_24
 
 RUN yum -y install \
 			chromedriver \
@@ -9,5 +9,3 @@ RUN yum -y install \
 			yum clean all \
 			&& \
 			:
-
-ENV RAILS_ENV test
