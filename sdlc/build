@@ -21,7 +21,7 @@ build_rails_test() {
 show_images() {
   echo
   echo
-  docker images | grep -e SIZe -e '^rails\b'
+  docker images | grep -e SIZE -e '^rails\b'
 }
 
 build_rails
