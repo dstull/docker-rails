@@ -5,4 +5,4 @@ set -e
 echo
 echo "Starting application container(s)"
 echo
-docker-compose up -d rails
+docker-compose up -d caddy

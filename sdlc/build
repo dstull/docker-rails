@@ -1,21 +1,7 @@
 #!/usr/bin/env bash
 
 build_rails() {
-  cat Dockerfile.prefix.in \
-  sdlc/Dockerfile.in \
-  > Dockerfile
-
-  time docker-compose build \
-  rails
-}
-
-build_rails_test() {
-  cat sdlc/Dockerfile.rails-test.in \
-  sdlc/Dockerfile.in \
-  > sdlc/Dockerfile.rails-test
-
-  time docker-compose build \
-  rails-test
+  time docker-compose build rails
 }
 
 show_images() {
@@ -25,5 +11,4 @@ show_images() {
 }
 
 build_rails
-build_rails_test
 show_images

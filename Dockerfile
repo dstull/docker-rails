@@ -10,3 +10,9 @@ COPY Gemfile.lock /web/Gemfile.lock
 RUN /bin/bash -l -c "bundle install"
 
 COPY . /web
+
+# for puma writing using tempfile
+ENV TEMP /web/tmp
+
+ENTRYPOINT ["/web/script/entrypoint"]
+CMD ["puma", "-C", "config/puma.rb"]

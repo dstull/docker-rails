@@ -23,7 +23,3 @@
 .byebug_history
 
 /.idea
-
-# ignore temp Dockerfiles
-# Dockerfile - uncommenting this for now so i can get automatic docker hub build to work
-sdlc/Dockerfile.rails-test

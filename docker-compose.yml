@@ -6,27 +6,52 @@ services:
     image: rails
     volumes:
       - .:/web
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:3000"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+    environment:
+      - RAILS_ENV=development
+    networks:
+      railsnet:
+        aliases:
+          - rails
+
+  rails2:
+    image: rails
+    depends_on:
+      rails:
+        condition: service_healthy
+    volumes:
+      - .:/web
+    healthcheck:
+      test: ["CMD", "curl", "http://localhost:3000"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+    environment:
+      - RAILS_ENV=development
+    networks:
+      railsnet:
+        aliases:
+          - rails2
+
+  caddy:
+    image: hammer098/caddy_rails:latest
+    depends_on:
+      - rails2
     ports:
-      - 3000:3000
-    entrypoint:
-      - bash
-      - --login
-  rails-test:
-    extends: rails
-    build:
-      context: .
-      dockerfile: sdlc/Dockerfile.rails-test
-    image: rails-test
-    shm_size: 128M
-    entrypoint:
-      - bash
-      - --login
-  rails-test-run:
-    image: rails-test
-    entrypoint:
-      - bash
-      - --login
-      - xvfb-run
-      - rails
-      - test:system
-      - RAILS_ENV=test
+      - 443:443
+    read_only: true
+    environment:
+      - TZ=America/New_York
+    networks:
+      - railsnet
+
+networks:
+  railsnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
