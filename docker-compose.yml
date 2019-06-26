@@ -4,8 +4,7 @@ services:
     build:
       context: .
     image: rails
-    volumes:
-      - .:/web
+    read_only: true
     healthcheck:
       test: ["CMD", "curl", "http://localhost:3000"]
       interval: 10s
@@ -20,11 +19,10 @@ services:
 
   rails2:
     image: rails
+    read_only: true
     depends_on:
       rails:
         condition: service_healthy
-    volumes:
-      - .:/web
     healthcheck:
       test: ["CMD", "curl", "http://localhost:3000"]
       interval: 10s
